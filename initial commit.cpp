@@ -34,20 +34,28 @@ int main() {
 	
 	do {
 		cout << "\nYour money: $" << money << '\n' ;
-		do {
-			if( !cin ) {
-				cin.clear() ;
-				cin.ignore(numeric_limits<streamsize>::max(), '\n') ;
-			}	
+		cout << "Place a bet: $" ;
+		cin >> currentBet ;
+		if (!cin) {
+			cout << "\nPlease enter a valid amount in dollars.\n" ;
+			cin.clear() ;
+			cin.ignore(numeric_limits<streamsize>::max(), '\n') ;
 			cout << "Place a bet: $" ;
 			cin >> currentBet ;
-		} while ( !cin || currentBet > money ) ;
-		// error checking for non-integer user value
-		
+		}
+		else {
+			cout << "Please enter an amount less than your money.\n" ;
+			cin.clear() ;
+			cin.ignore(numeric_limits<streamsize>::max(), '\n') ;
+			cout << "Place a bet: $" ;
+			cin >> currentBet ;
+		}
+	} while ( !cin || currentBet > money ) ;
+	// error checking for non-integer user value
+	do {	
 		if ( !(currentBet == 0) ) {
 			if ( currentBet <= 0 ) {
 				userBets.push_back( 0 ) ;
-				break ;
 			// breaks the user out of the loop immediately if they put in 0
 			}		
 
@@ -96,7 +104,6 @@ int main() {
 
 			if  ( money == 0 ) {
 				cout << "\nYou are out of money!\n" ;
-				break ;
 			// breaks the user out when they lose big time lol !	
 			}		
 		}	
